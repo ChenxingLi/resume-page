@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chenxing Li | 李辰星</title>
+  <meta name="description" content="Research Scientist at Shanghai TreeGraph Blockchain Research Institute. PhD from Tsinghua University, advised by Andrew Chi-Chih Yao.">
+  <meta property="og:title" content="Chenxing Li — Research Scientist">
+  <meta property="og:description" content="Blockchain systems researcher and core developer. PhD from Tsinghua University.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-primary: #2D5FA0;
+      --color-primary-light: #4A7BC8;
+      --color-primary-faint: #EBF0F8;
+      --color-accent: #C45D3E;
+      --color-accent-faint: #FDF0EC;
+      --color-text: #1A1A2E;
+      --color-text-secondary: #5A6377;
+      --color-surface: #FAFBFD;
+      --color-card: #FFFFFF;
+      --color-border: #E2E6ED;
+      --font-main: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-cjk: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --max-width: 50rem;
+      --section-gap: 4rem;
+      --nav-height: 3.2rem;
+    }
+
+    /* Fluid root font: 15px on laptop → ~22px on 4K displays */
+    html {
+      font-size: clamp(15px, 0.5vw + 11px, 23px);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--color-text);
+      background: var(--color-surface);
+      line-height: 1.7;
+      font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--color-primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      background: rgba(250, 251, 253, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1rem, 4vw, 2rem);
+    }
+
+    .nav-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .nav-name:hover { text-decoration: none; color: var(--color-primary); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--color-primary);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--color-primary); text-decoration: none; }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 18px; height: 2px;
+      background: var(--color-text);
+      border-radius: 1px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    /* ── Main ── */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 2rem);
+      padding-top: calc(var(--nav-height) + 2.5rem);
+    }
+
+    section {
+      margin-top: var(--section-gap);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      border-left: 3px solid var(--color-primary);
+      padding-left: 0.7rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Hero: left text + right card ── */
+    #hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2.5rem;
+      align-items: start;
+      margin-top: 0;
+      opacity: 1;
+      transform: none;
+    }
+
+    .hero-text p {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: var(--color-text);
+    }
+
+    .hero-text p + p { margin-top: 0.7rem; }
+
+    .hero-text a { font-weight: 500; }
+    .hero-text a:hover { text-decoration: underline; }
+
+    .hero-card {
+      width: 14.5rem;
+      flex-shrink: 0;
+      padding: 1.6rem 1.4rem;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 0.6rem;
+      position: sticky;
+      top: calc(var(--nav-height) + 1.5rem);
+    }
+
+    .hero-card-name {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--color-text);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+    }
+
+    .hero-card-name-cn {
+      font-family: var(--font-cjk);
+      font-size: 0.88rem;
+      color: var(--color-text-secondary);
+      margin-top: 0.15rem;
+    }
+
+    .hero-card-role {
+      font-size: 0.78rem;
+      color: var(--color-text-secondary);
+      margin-top: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .hero-card-links {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .hero-card-links a {
+      font-size: 0.78rem;
+      color: var(--color-text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .hero-card-links a:hover { color: var(--color-primary); text-decoration: none; }
+
+    .hero-card-links svg {
+      width: 14px; height: 14px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ── Experience ── */
+    .timeline { position: relative; padding-left: 1.4rem; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0.5rem; bottom: 0.5rem;
+      width: 2px;
+      background: var(--color-border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.4rem; top: 0.5rem;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      transform: translateX(-3px);
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .timeline-role {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .timeline-date {
+      font-size: 0.76rem;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .timeline-org {
+      font-size: 0.85rem;
+      color: var(--color-text-secondary);
+      margin-top: 0.1rem;
+    }
+
+    .timeline-desc {
+      font-size: 0.85rem;
+      color: var(--color-text);
+      margin-top: 0.5rem;
+      line-height: 1.7;
+    }
+
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.7rem;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.18rem 0.5rem;
+      border-radius: 3px;
+      background: var(--color-primary-faint);
+      color: var(--color-primary);
+    }
+
+    /* ── Education ── */
+    .edu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .edu-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem 1.5rem;
+    }
+
+    .edu-degree {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .edu-date {
+      font-size: 0.78rem;
+      color: var(--color-text-secondary);
+      text-align: right;
+      align-self: baseline;
+    }
+
+    .edu-detail {
+      grid-column: 1 / -1;
+      font-size: 0.84rem;
+      color: var(--color-text-secondary);
+      line-height: 1.65;
+    }
+
+    .edu-item + .edu-item {
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    /* ── Publications ── */
+    .pub-count {
+      font-size: 0.84rem;
+      color: var(--color-text-secondary);
+      margin-bottom: 1.2rem;
+    }
+
+    .pub-list { list-style: none; }
+
+    .pub-item {
+      display: grid;
+      grid-template-columns: 5.5rem 1fr 2.8rem;
+      gap: 0 0.8rem;
+      align-items: baseline;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .pub-item:last-child { border-bottom: none; }
+
+    .pub-venue {
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 0.15rem 0;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      text-align: left;
+    }
+
+    .pub-venue.tier-top { color: var(--color-accent); }
+    .pub-venue.tier-journal { color: var(--color-primary); }
+    .pub-venue.tier-other { color: var(--color-text-secondary); }
+
+    .pub-body { min-width: 0; }
+
+    .pub-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.45;
+    }
+
+    .pub-authors {
+      font-size: 0.76rem;
+      color: var(--color-text-secondary);
+      margin-top: 0.2rem;
+      line-height: 1.5;
+    }
+
+    .pub-authors .me {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .pub-venue-full {
+      font-size: 0.72rem;
+      color: var(--color-text-secondary);
+      font-style: italic;
+      margin-top: 0.1rem;
+    }
+
+    .pub-links {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.2rem;
+    }
+
+    .pub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.15rem;
+      font-size: 0.6rem;
+      font-weight: 400;
+      color: #A4ADBF; /* 5.4PB 7.0/2.9 — text-secondary same hue/chroma, value raised to 7.0 */
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .pub-link:hover {
+      color: var(--color-primary);
+    }
+
+    .pub-link svg {
+      width: 0.58rem;
+      height: 0.58rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .pub-year {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      text-align: right;
+    }
+
+    /* Folded publications */
+    .pub-folded { display: none; }
+    .pub-list.expanded .pub-folded { display: grid; }
+
+    .pub-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.6rem;
+      padding: 0.3rem 0;
+      font-family: var(--font-main);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+
+    .pub-toggle:hover { color: var(--color-primary); }
+
+    .pub-toggle svg {
+      width: 14px; height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform 0.2s ease;
+    }
+
+    .pub-list.expanded + .pub-toggle svg { transform: rotate(180deg); }
+
+    /* ── Projects ── */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.1rem 1.5rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .project-item:last-child { border-bottom: none; }
+
+    .project-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .project-date {
+      font-size: 0.78rem;
+      color: var(--color-text-secondary);
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .project-meta {
+      grid-column: 1 / -1;
+      font-size: 0.78rem;
+      color: var(--color-text-secondary);
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .project-meta .source { color: var(--color-primary); font-weight: 500; }
+
+    /* ── Open Source ── */
+    .oss-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .oss-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.1rem 0.7rem;
+      align-items: baseline;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .oss-item:last-child { border-bottom: none; }
+
+    .oss-item-header {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      grid-column: 1 / -1;
+    }
+
+    .oss-item-header svg {
+      width: 16px; height: 16px;
+      fill: var(--color-text-secondary);
+      flex-shrink: 0;
+      position: relative;
+      top: 1px;
+    }
+
+    .oss-repo-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .oss-repo-name:hover { text-decoration: underline; }
+
+    .oss-desc {
+      grid-column: 1 / -1;
+      font-size: 0.82rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      padding-left: 1.55rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.5rem clamp(1.25rem, 5vw, 2rem) 2rem;
+      margin-top: var(--section-gap);
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+    }
+
+    footer a { color: var(--color-text-secondary); }
+    footer a:hover { color: var(--color-primary); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0; right: 0;
+        background: rgba(250, 251, 253, 0.96);
+        backdrop-filter: blur(10px);
+        padding: 0.8rem 1.5rem;
+        border-bottom: 1px solid var(--color-border);
+        gap: 0.6rem;
+      }
+      .nav-hamburger { display: flex; }
+      .lang-switch { border-left: none; padding-left: 0; border-top: 1px solid var(--color-border); padding-top: 0.4rem; }
+
+      /* Hero: card first, then text */
+      #hero {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .hero-card {
+        order: -1;
+        width: 100%;
+        position: static;
+        padding: 1.2rem;
+      }
+      .hero-card-links { flex-direction: row; gap: 1rem; }
+
+      /* Publications: stacked layout */
+      .pub-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+      .pub-venue {
+        align-self: flex-start;
+      }
+      .pub-venue::after {
+        content: attr(data-year);
+        margin-left: 0.5rem;
+        font-weight: 400;
+        text-transform: none;
+        letter-spacing: 0;
+        color: var(--color-text-secondary);
+      }
+      .pub-year { display: none; }
+
+      /* Education */
+      .edu-item { grid-template-columns: 1fr; }
+      .edu-date { text-align: left; margin-top: -0.1rem; }
+
+      /* Projects: stack title and meta */
+      .project-item { grid-template-columns: 1fr; }
+      .project-date { text-align: left; font-size: 0.76rem; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --section-gap: 3rem; }
+      .section-title { font-size: 1.05rem; }
+    }
+
+    /* ── Language ── */
+    body.lang-zh {
+      font-family: var(--font-cjk), var(--font-main);
+    }
+
+    .lang-switch {
+      border-left: 1px solid var(--color-border);
+      padding-left: 1.4rem;
+    }
+
+    .lang-toggle {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+    }
+
+    /* ── Print ── */
+    @media print {
+      nav, .hero-scroll { display: none; }
+      section { opacity: 1; transform: none; margin-top: 1.5rem; }
+      main { padding-top: 0; }
+      #hero { gap: 1rem; }
+      .hero-card { position: static; }
+      body { font-size: 11pt; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="nav-name" data-i18n="nav.name">Chenxing Li</a>
+    <button class="nav-hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#experience" data-i18n="nav.exp">Experience</a></li>
+      <li><a href="#education" data-i18n="nav.edu">Education</a></li>
+      <li><a href="#publications" data-i18n="nav.pub">Publications</a></li>
+      <li><a href="#projects" data-i18n="nav.proj">Projects</a></li>
+      <li><a href="#opensource" data-i18n="nav.code">Code</a></li>
+      <li class="lang-switch"><a href="#" class="lang-toggle" data-i18n="nav.lang">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Hero: left text + right card -->
+    <section id="hero">
+      <div class="hero-text">
+        <p data-i18n="hero.bio1">
+          I am a Research Scientist at <a href="https://confluxnetwork.org" target="_blank" rel="noopener">Shanghai TreeGraph Blockchain Research Institute (Conflux)</a>, where I have been a founding member and core developer since 2018. I received my Ph.D. from <a href="https://www.tsinghua.edu.cn" target="_blank" rel="noopener">Tsinghua University</a>, advised by Professor <a href="https://iiis.tsinghua.edu.cn/yao/" target="_blank" rel="noopener">Andrew Chi-Chih Yao</a>.
+        </p>
+        <p data-i18n="hero.bio2">
+          My research focuses on the security and performance of blockchain systems, with particular interest in consensus protocols, authenticated storage, and the application of cryptographic primitives to decentralized systems. I design core features of the Conflux blockchain and have contributed to key developments including PoW/PoS hybrid consensus, heterogeneous VM interoperation, and on-chain governance.
+        </p>
+      </div>
+      <aside class="hero-card">
+        <div class="hero-card-name">Chenxing Li</div>
+        <div class="hero-card-name-cn">李辰星</div>
+        <div class="hero-card-role" data-i18n="hero.role">
+          Research Scientist<br>
+          Conflux / TreeGraph
+        </div>
+        <div class="hero-card-links">
+          <a href="mailto:lylcx2007@gmail.com">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            lylcx2007@gmail.com
+          </a>
+          <a href="https://github.com/ChenxingLi" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.337-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <h2 class="section-title" data-i18n="exp.title">Experience</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-header">
+            <div class="timeline-role" data-i18n="exp.role">Research Scientist &amp; Core Developer</div>
+            <div class="timeline-date" data-i18n="exp.date">Jul 2018 &mdash; Present</div>
+          </div>
+          <div class="timeline-org" data-i18n="exp.org">Shanghai TreeGraph Blockchain Research Institute (Conflux)</div>
+          <div class="timeline-desc" data-i18n="exp.desc">
+            Founding employee and core system developer. Responsible for algorithm research, protocol design, module optimization, and system development for the TreeGraph blockchain.
+          </div>
+          <div class="timeline-tags">
+            <span class="tag" data-i18n="exp.tag1">TreeGraph Consensus</span>
+            <span class="tag" data-i18n="exp.tag2">PoW/PoS Hybrid</span>
+            <span class="tag" data-i18n="exp.tag3">Dual-Space Mechanism</span>
+            <span class="tag" data-i18n="exp.tag4">HEMVM Interop</span>
+            <span class="tag" data-i18n="exp.tag5">Ethereum Compatibility</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <h2 class="section-title" data-i18n="edu.title">Education</h2>
+      <div class="edu-list">
+        <div class="edu-item">
+          <div class="edu-degree" data-i18n="edu.phd">Ph.D. in Computer Science, Tsinghua University</div>
+          <div class="edu-date" data-i18n="edu.phd.date">2017 &mdash; 2022</div>
+          <div class="edu-detail" data-i18n="edu.phd.detail">
+            Advised by Professor Andrew Chi-Chih Yao (Turing Award, 2000).
+            Thesis: <em>Protocols and Algorithms for Secure, High-Performance Blockchains</em>.
+          </div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree" data-i18n="edu.bs">B.S. in Computer Science, Tsinghua University</div>
+          <div class="edu-date" data-i18n="edu.bs.date">2013 &mdash; 2017</div>
+          <div class="edu-detail" data-i18n="edu.bs.detail">
+            Yao Class &mdash; an elite CS program founded by Turing Award laureate Professor Andrew Chi-Chih Yao.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section id="publications">
+      <h2 class="section-title" data-i18n="pub.title">Publications</h2>
+      <p class="pub-count" data-i18n="pub.count">11 papers at venues including OSDI, OOPSLA, USENIX ATC, and SoCC</p>
+      <ul class="pub-list">
+        <li class="pub-item">
+          <span class="pub-venue tier-top" data-year="2025">OOPSLA</span>
+          <div class="pub-body">
+            <div class="pub-title">HEMVM: A Heterogeneous Blockchain Framework for Interoperable Virtual Machines</div>
+            <div class="pub-authors">V. Nekriach, S.M. Beillahi, <span class="me">Chenxing Li</span>, P. Li, M. Wu, A. Veneris, F. Long</div>
+            <div class="pub-venue-full">Object-oriented Programming, Systems, Languages, and Applications</div>
+            <div class="pub-links">
+              <a href="https://dl.acm.org/doi/10.1145/3763076" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
+              <a href="https://www.eecg.utoronto.ca/~veneris/OOPSLA25.pdf" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>PDF</a>
+            </div>
+          </div>
+          <span class="pub-year">2025</span>
+        </li>
+        <li class="pub-item">
+          <span class="pub-venue tier-journal" data-year="2024">ACM ToS</span>
+          <div class="pub-body">
+            <div class="pub-title">LVMT: An Efficient Authenticated Storage for Blockchain</div>
+            <div class="pub-authors"><span class="me">Chenxing Li</span>, S.M. Beillahi, G. Yang, M. Wu, W. Xu, F. Long</div>
+            <div class="pub-venue-full">ACM Transactions on Storage</div>
+            <div class="pub-links">
+              <a href="https://dl.acm.org/doi/full/10.1145/3664818" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
+            </div>
+          </div>
+          <span class="pub-year">2024</span>
+        </li>
+        <li class="pub-item">
+          <span class="pub-venue tier-top" data-year="2023">OSDI</span>
+          <div class="pub-body">
+            <div class="pub-title">LVMT: An Efficient Authenticated Storage for Blockchain</div>
+            <div class="pub-authors"><span class="me">Chenxing Li</span>, S.M. Beillahi, G. Yang, M. Wu, W. Xu, F. Long</div>
+            <div class="pub-venue-full">USENIX Symposium on Operating Systems Design and Implementation</div>
+            <div class="pub-links">
+              <a href="https://www.usenix.org/conference/osdi23/presentation/li-chenxing" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
+              <a href="https://www.usenix.org/system/files/osdi23-li-chenxing.pdf" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>PDF</a>
+            </div>
+          </div>
+          <span class="pub-year">2023</span>
+        </li>
+        <li class="pub-item">
+          <span class="pub-venue tier-journal" data-year="2022">Clim. Policy</span>
+          <div class="pub-body">
+            <div class="pub-title">An Authenticated and Secure Accounting System for International Emissions Trading</div>
+            <div class="pub-authors"><span class="me">Chenxing Li</span>, Y. Yu, A.C.-C. Yao, D. Zhang, X. Zhang</div>
+            <div class="pub-venue-full">Climate Policy 22, no. 9-10</div>
+            <div class="pub-links">
+              <a href="https://www.tandfonline.com/doi/abs/10.1080/14693062.2022.2107474" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
+              <a href="https://arxiv.org/pdf/2011.13954" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>PDF</a>
+            </div>
+          </div>
+          <span class="pub-year">2022</span>
+        </li>
+        <li class="pub-item">
+          <span class="pub-venue tier-top" data-year="2020">SoCC</span>
+          <div class="pub-body">
+            <div class="pub-title">ShRec: Bandwidth-Efficient Transaction Relay in High-Throughput Blockchain Systems</div>
+            <div class="pub-authors">Y. Han, <span class="me">Chenxing Li</span>, P. Li, M. Wu, D. Zhou, F. Long</div>
+            <div class="pub-venue-full">ACM Symposium on Cloud Computing</div>
+            <div class="pub-links">
+              <a href="https://dl.acm.org/doi/10.1145/3419111.3421283" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
+              <a href="https://www.cs.toronto.edu/~fanl/papers/shrec-socc20.pdf" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>PDF</a>
+            </div>
+          </div>
+          <span class="pub-year">2020</span>
+        </li>
+        <li class="pub-item">
+          <span class="pub-venue tier-top" data-year="2020">ATC</span>
+          <div class="pub-body">
+            <div class="pub-title">A Decentralized Blockchain with High Throughput and Fast Confirmation</div>
+            <div class="pub-authors"><span class="me">Chenxing Li</span>, P. Li, D. Zhou, Z. Yang, M. Wu, G. Yang, W. Xu, A. Yao</div>
+            <div class="pub-venue-full">USENIX Annual Technical Conference</div>
+            <div class="pub-links">
+              <a href="https://www.usenix.org/conference/atc20/presentation/li-chenxing" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
+              <a href="https://www.usenix.org/system/files/atc20-li-chenxing.pdf" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>PDF</a>
+            </div>
+          </div>
+          <span class="pub-year">2020</span>
+        </li>
+        <li class="pub-item">
+          <span class="pub-venue tier-journal" data-year="2020">Bioinform.</span>
+          <div class="pub-body">
+            <div class="pub-title">Secure Multiparty Computation for Privacy-Preserving Drug Discovery</div>
+            <div class="pub-authors">R. Ma, Y. Li, <span class="me">Chenxing Li</span>, F. Wan, H. Hu, W. Xu, J. Zeng</div>
+            <div class="pub-venue-full">Bioinformatics</div>
+            <div class="pub-links">
+              <a href="https://academic.oup.com/bioinformatics/article/36/9/2872/5709032" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
+            </div>
+          </div>
+          <span class="pub-year">2020</span>
+        </li>
+        <li class="pub-item pub-folded">
+          <span class="pub-venue tier-other" data-year="2018">ICSC</span>
+          <div class="pub-body">
+            <div class="pub-title">Context-Based Few-Shot Word Representation Learning</div>
+            <div class="pub-authors"><span class="me">Chenxing Li</span>, G. Wang, G. de Melo</div>
+            <div class="pub-venue-full">IEEE International Conference on Semantic Computing</div>
+            <div class="pub-links">
+              <a href="https://ieeexplore.ieee.org/document/8334464" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
+            </div>
+          </div>
+          <span class="pub-year">2018</span>
+        </li>
+        <li class="pub-item pub-folded">
+          <span class="pub-venue tier-other" data-year="2017">IMACC</span>
+          <div class="pub-body">
+            <div class="pub-title">Revealing Encryption for Partial Ordering</div>
+            <div class="pub-authors">H. Haagh, Y. Ji, <span class="me">Chenxing Li</span>, C. Orlandi, Y. Song</div>
+            <div class="pub-venue-full">IMA International Conference on Cryptography and Coding</div>
+            <div class="pub-links">
+              <a href="https://link.springer.com/chapter/10.1007/978-3-319-71045-7_1" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
+              <a href="https://eprint.iacr.org/2016/972.pdf" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>PDF</a>
+            </div>
+          </div>
+          <span class="pub-year">2017</span>
+        </li>
+        <li class="pub-item pub-folded">
+          <span class="pub-venue tier-other" data-year="2016">LCN</span>
+          <div class="pub-body">
+            <div class="pub-title">BAH: A New Bitmap Index for Data Retrieval in Traffic Archival</div>
+            <div class="pub-authors"><span class="me">Chenxing Li</span>, Z. Chen, W. Zheng, Y. Wu, J. Cao</div>
+            <div class="pub-venue-full">IEEE Conference on Local Computer Networks</div>
+            <div class="pub-links">
+              <a href="https://ieeexplore.ieee.org/document/7796869" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
+            </div>
+          </div>
+          <span class="pub-year">2016</span>
+        </li>
+        <li class="pub-item pub-folded">
+          <span class="pub-venue tier-journal" data-year="2016">IEEE CL</span>
+          <div class="pub-body">
+            <div class="pub-title">CAMP: A New Bitmap Index for Data Retrieval in Traffic Archival</div>
+            <div class="pub-authors">Y. Wu, Z. Chen, J. Cao, H. Li, <span class="me">Chenxing Li</span>, Y. Wang, W. Zheng, J. Chang, J. Zhou, Z. Hu, J. Guo</div>
+            <div class="pub-venue-full">IEEE Communication Letters</div>
+            <div class="pub-links">
+              <a href="https://ieeexplore.ieee.org/document/7448840" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
+            </div>
+          </div>
+          <span class="pub-year">2016</span>
+        </li>
+      </ul>
+      <button class="pub-toggle" aria-expanded="false">
+        <span class="pub-toggle-text">Show 4 earlier papers</span>
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </button>
+    </section>
+
+    <!-- Research Projects -->
+    <section id="projects">
+      <h2 class="section-title" data-i18n="proj.title">Research Projects</h2>
+      <div class="project-list">
+        <div class="project-item">
+          <div class="project-title" data-i18n="proj.1.title">Ultra-Large-Scale Blockchain Key Technologies and System Development</div>
+          <div class="project-date" data-i18n="proj.1.date">2023 &mdash; 2026</div>
+          <div class="project-meta">
+            <span class="source" data-i18n="proj.1.source">National Key R&amp;D Program of China</span>
+            <span>&middot;</span>
+            <span data-i18n="proj.1.role">Principal Investigator</span>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-title" data-i18n="proj.2.title">Post-Quantum Public Chain Prototype System Design and Implementation</div>
+          <div class="project-date" data-i18n="proj.2.date">2023 &mdash; 2025</div>
+          <div class="project-meta">
+            <span class="source" data-i18n="proj.2.source">Shanghai &ldquo;Sci-Tech Innovation&rdquo; Action Plan</span>
+            <span>&middot;</span>
+            <span data-i18n="proj.2.role">Principal Investigator</span>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="project-title" data-i18n="proj.3.title">Key Technologies for Distributed Trusted Data Storage</div>
+          <div class="project-date" data-i18n="proj.3.date">2021 &mdash; 2024</div>
+          <div class="project-meta">
+            <span class="source" data-i18n="proj.3.source">Shanghai AI Science and Technology Support Program</span>
+            <span>&middot;</span>
+            <span data-i18n="proj.3.role">Lead Researcher</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Open Source -->
+    <section id="opensource">
+      <h2 class="section-title" data-i18n="oss.title">Open Source</h2>
+      <div class="oss-list">
+        <div class="oss-item">
+          <div class="oss-item-header">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.337-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            <a href="https://github.com/Conflux-Chain/conflux-rust" target="_blank" rel="noopener" class="oss-repo-name">conflux-rust</a>
+          </div>
+          <div class="oss-desc" data-i18n="oss.conflux.desc">Core node implementation of the Conflux blockchain. Integrates TreeGraph consensus, ShRec transaction relay, PoW/PoS hybrid consensus, and dual-space execution layer.</div>
+        </div>
+        <div class="oss-item">
+          <div class="oss-item-header">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.337-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836a9.59 9.59 0 012.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.416 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            <a href="https://github.com/ChenxingLi/authenticated-storage-benchmarks" target="_blank" rel="noopener" class="oss-repo-name">authenticated-storage-benchmarks</a>
+          </div>
+          <div class="oss-desc" data-i18n="oss.bench.desc">Implementation and modular benchmarks for the LVMT paper (OSDI 2023). Supports flexible combinations of KV backends, authenticated storage protocols, and test workloads.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div data-i18n="footer.info">Chenxing Li &middot; <a href="mailto:lylcx2007@gmail.com">lylcx2007@gmail.com</a> &middot; Shanghai, China</div>
+    <div style="margin-top: 0.25rem; opacity: 0.65;" data-i18n="footer.updated">Last updated April 2026</div>
+  </footer>
+
+  <script>
+    // Scroll-triggered fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('section:not(#hero)').forEach(s => observer.observe(s));
+
+    // Scroll spy
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    function updateScrollSpy() {
+      const scrollPos = window.scrollY + 80;
+      let current = '';
+      sections.forEach(s => {
+        if (s.offsetTop <= scrollPos) current = s.id;
+      });
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+      });
+    }
+    window.addEventListener('scroll', updateScrollSpy, { passive: true });
+    updateScrollSpy();
+
+    // Mobile nav toggle
+    const hamburger = document.querySelector('.nav-hamburger');
+    const navLinksEl = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => navLinksEl.classList.toggle('open'));
+    navLinksEl.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A') navLinksEl.classList.remove('open');
+    });
+
+    // Publication fold/expand
+    const pubToggle = document.querySelector('.pub-toggle');
+    const pubList = document.querySelector('.pub-list');
+    const pubToggleText = document.querySelector('.pub-toggle-text');
+    pubToggle.addEventListener('click', () => {
+      const expanded = pubList.classList.toggle('expanded');
+      pubToggle.setAttribute('aria-expanded', expanded);
+      pubToggleText.textContent = expanded ? 'Show fewer' : 'Show 4 earlier papers';
+    });
+  </script>
+  <script src="i18n.js"></script>
+</body>
+</html>
