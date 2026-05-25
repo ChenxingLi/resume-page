@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News | Chenxing Li</title>
+  <meta name="description" content="News coverage, talks, and media appearances of Chenxing Li.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-primary: #2D5FA0;
+      --color-primary-light: #4A7BC8;
+      --color-primary-faint: #EBF0F8;
+      --color-accent: #C45D3E;
+      --color-accent-faint: #FDF0EC;
+      --color-text: #1A1A2E;
+      --color-text-secondary: #5A6377;
+      --color-surface: #FAFBFD;
+      --color-card: #FFFFFF;
+      --color-border: #E2E6ED;
+      --font-main: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-cjk: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --max-width: 50rem;
+      --section-gap: 4rem;
+      --nav-height: 3.2rem;
+    }
+
+    html {
+      font-size: clamp(15px, 0.5vw + 11px, 23px);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--color-text);
+      background: var(--color-surface);
+      line-height: 1.7;
+      font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--color-primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-height);
+      background: rgba(250, 251, 253, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1rem, 4vw, 2rem);
+    }
+
+    .nav-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+    .nav-name:hover { text-decoration: none; color: var(--color-primary); }
+
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--color-primary);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--color-primary); text-decoration: none; }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 18px; height: 2px;
+      background: var(--color-text);
+      border-radius: 1px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    /* ── Main ── */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 5vw, 2rem);
+      padding-top: calc(var(--nav-height) + 2.5rem);
+    }
+
+    section {
+      margin-top: var(--section-gap);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    section.visible { opacity: 1; transform: translateY(0); }
+    section:first-of-type { margin-top: 0; opacity: 1; transform: none; }
+
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      border-left: 3px solid var(--color-primary);
+      padding-left: 0.7rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── News card (base) ── */
+    .news-card {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 0.4rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+
+    .news-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .news-source {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--color-primary-light);
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+
+    .pin-icon {
+      width: 12px;
+      height: 12px;
+      fill: var(--color-text-secondary);
+      vertical-align: -1px;
+      margin-right: 0.25rem;
+    }
+
+    .news-date {
+      font-size: 0.73rem;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .news-title {
+      font-size: 1.0rem;
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .news-title a { color: inherit; }
+    .news-title a:hover { color: var(--color-primary); text-decoration: underline; }
+
+    .news-excerpt {
+      font-size: 0.8rem;
+      color: var(--color-text-secondary);
+      line-height: 1.75;
+      overflow-wrap: break-word;
+    }
+    .news-excerpt strong {
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    /* ── Highlight card ── */
+    .news-highlight {
+      margin-bottom: 1.2rem;
+    }
+
+    .highlight-sub .news-excerpt {
+      margin-top: 0.5rem;
+    }
+
+    /* ── Body zone (excerpt + supplementary) ── */
+    .news-body {
+      background: rgba(0,0,0,0.025);
+      margin: 0.7rem -1.5rem -1.4rem;
+      padding: 0.7rem 1.5rem 1.4rem;
+    }
+
+    /* ── Dual highlight sub-articles ── */
+    .highlight-sub + .highlight-sub {
+      border-top: 1px solid var(--color-border);
+      margin-top: 1.1rem;
+      padding-top: 1.1rem;
+    }
+
+    .highlight-sub-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.4rem;
+    }
+
+    .highlight-sub-header .news-source {
+      font-weight: 600;
+      color: var(--color-primary);
+      font-size: 0.8rem;
+    }
+
+    .highlight-sub-header .news-date {
+      font-size: 0.72rem;
+    }
+
+    /* ── Syndication (reposts, chips) ── */
+    .news-syndication {
+      margin-top: 0.6rem;
+      font-size: 0.72rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .syndication-label {
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      margin-right: 0.1rem;
+      flex-shrink: 0;
+    }
+
+    .syndication-chip {
+      display: inline-block;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 0.12em 0.55em;
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+    .syndication-chip:hover {
+      background: var(--color-primary-faint);
+      text-decoration: none;
+    }
+
+    /* ── Related (container block) ── */
+    .news-related {
+      margin-top: 0.6rem;
+      padding: 0.5rem 0.65rem;
+      border: 1px solid var(--color-border);
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      line-height: 1.65;
+    }
+
+    .related-label {
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      font-size: 0.72rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .related-row {
+      margin-bottom: 0.1rem;
+    }
+
+    .related-source {
+      font-weight: 600;
+      color: var(--color-primary-light);
+    }
+
+    .related-item {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+    }
+    .related-item:hover { color: var(--color-primary); text-decoration: underline; }
+
+    .related-repost-label {
+      color: var(--color-text-secondary);
+      font-weight: 600;
+    }
+
+    /* ── Talk footer (bottom of card, outside body zone) ── */
+    .news-card:has(.talk-footer) .news-body {
+      margin-bottom: 0;
+      padding-bottom: 0.7rem;
+    }
+
+    .talk-footer {
+      margin: 0 -1.5rem -1.4rem;
+      padding: 0;
+      background: var(--color-primary-faint);
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      font-size: 0.72rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    .talk-footer > * {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 0.45rem 0.75rem;
+    }
+
+    .talk-footer > *:not(:last-child) {
+      border-right: 1px solid var(--color-border);
+    }
+
+    .talk-role {
+      flex: 18 1 0;
+      max-width: 7rem;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    body.lang-zh .talk-role {
+      font-family: var(--font-cjk), var(--font-main);
+    }
+
+    .talk-title {
+      flex: 50 1 0;
+      min-width: 0;
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    .talk-venue {
+      flex: 32 1 0;
+      max-width: 16rem;
+      color: var(--color-text-secondary);
+      text-align: right;
+    }
+
+    /* ── Section toggle ── */
+    .section-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.8rem;
+      padding: 0.3rem 0;
+      font-family: var(--font-main);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .section-toggle:hover { color: var(--color-primary); }
+
+    .section-toggle svg {
+      width: 14px; height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform 0.2s ease;
+    }
+    .section-toggle.expanded svg { transform: rotate(180deg); }
+
+    .folded-region { display: none; }
+    .folded-region.open { display: block; }
+
+    /* ── Footer ── */
+    footer {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 2.5rem clamp(1.25rem, 5vw, 2rem) 2rem;
+      margin-top: var(--section-gap);
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+    }
+    footer a { color: var(--color-text-secondary); }
+    footer a:hover { color: var(--color-primary); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0; right: 0;
+        background: rgba(250, 251, 253, 0.96);
+        backdrop-filter: blur(10px);
+        padding: 0.8rem 1.5rem;
+        border-bottom: 1px solid var(--color-border);
+        gap: 0.6rem;
+      }
+      .nav-hamburger { display: flex; }
+      .lang-switch { border-left: none; padding-left: 0; border-top: 1px solid var(--color-border); padding-top: 0.4rem; }
+
+      .news-card { padding: 1.2rem 1.1rem; }
+      .news-body { margin: 0.6rem -1.1rem -1.2rem; padding: 0.6rem 1.1rem 1.2rem; }
+      .news-card:has(.talk-footer) .news-body { margin-bottom: 0; padding-bottom: 0.6rem; }
+      .talk-footer { margin: 0 -1.1rem -1.2rem; padding: 0; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --section-gap: 3rem; }
+      .section-title { font-size: 1.05rem; }
+    }
+
+    body.lang-zh {
+      font-family: var(--font-cjk), var(--font-main);
+    }
+    body.lang-zh .news-excerpt {
+      line-height: 1.8;
+    }
+
+    .lang-switch {
+      border-left: 1px solid var(--color-border);
+      padding-left: 1.4rem;
+    }
+    .lang-toggle {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      cursor: pointer;
+    }
+
+    @media print {
+      nav { display: none; }
+      section { opacity: 1; transform: none; margin-top: 1.5rem; }
+      main { padding-top: 0; }
+      .folded-region { display: block !important; }
+      body { font-size: 11pt; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-name" id="nav-name">Chenxing Li</a>
+    <button class="nav-hamburger" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html#experience" id="nav-exp">Experience</a></li>
+      <li><a href="index.html#education" id="nav-edu">Education</a></li>
+      <li><a href="index.html#publications" id="nav-pub">Publications</a></li>
+      <li><a href="index.html#projects" id="nav-proj">Projects</a></li>
+      <li><a href="index.html#opensource" id="nav-code">Code</a></li>
+      <li><a href="news.html" class="active" id="nav-news">News</a></li>
+      <li class="lang-switch"><a href="#" class="lang-toggle" id="nav-lang">中文</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="highlights"></section>
+    <section id="talks"></section>
+    <section id="coverage"></section>
+    <section id="campus"></section>
+  </main>
+
+  <footer>
+    <div id="footer-info">Chenxing Li &middot; <a href="mailto:lylcx2007@gmail.com">lylcx2007@gmail.com</a> &middot; Shanghai, China</div>
+    <div style="margin-top: 0.25rem; opacity: 0.65;" id="footer-updated">Last updated April 2026</div>
+  </footer>
+
+  <script src="news-data.js"></script>
+  <script>
+    const UI = {
+      en: {
+        name: 'Chenxing Li',
+        exp: 'Experience', edu: 'Education', pub: 'Publications', proj: 'Projects', code: 'Code', news: 'News', lang: '中文',
+        highlights: 'Highlights',
+        talks: 'Talks & Forums',
+        coverage: 'More Coverage',
+        campus: 'Campus',
+        repost: 'Reposted by',
+        related: 'Related',
+        showMore: n => `Show ${n} more`,
+        showLess: 'Show fewer',
+        expand: n => `Expand ${n} items`,
+        collapse: 'Collapse',
+        footer1: 'Chenxing Li &middot; <a href="mailto:lylcx2007@gmail.com">lylcx2007@gmail.com</a> &middot; Shanghai, China',
+        footer2: 'Last updated April 2026'
+      },
+      zh: {
+        name: '李辰星',
+        exp: '工作经历', edu: '教育背景', pub: '学术论文', proj: '科研项目', code: '开源', news: '新闻', lang: 'EN',
+        highlights: '重要报道',
+        talks: '演讲与论坛',
+        coverage: '更多报道',
+        campus: '校园足迹',
+        repost: '转载',
+        related: '相关',
+        showMore: n => `展开 ${n} 条`,
+        showLess: '收起',
+        expand: n => `展开 ${n} 条`,
+        collapse: '收起',
+        footer1: '李辰星 · <a href="mailto:lylcx2007@gmail.com">lylcx2007@gmail.com</a> · 上海',
+        footer2: '最后更新：2026年4月'
+      }
+    };
+
+    let currentLang = 'en';
+
+    function t(obj) {
+      if (!obj) return '';
+      return obj[currentLang] || obj.en || '';
+    }
+
+    function createCard(item, opts = {}) {
+      const el = document.createElement('article');
+      el.className = 'news-card' + (opts.highlight ? ' news-highlight' : '');
+
+      let html = '<div class="news-header">';
+      const isPinned = item.pinned || opts.pinned;
+      const pin = isPinned ? '<svg class="pin-icon" viewBox="0 0 16 16"><path d="M9.828.722a.5.5 0 0 1 .354.146l4.95 4.95a.5.5 0 0 1 0 .707c-.48.48-1.072.588-1.503.588-.177 0-.335-.018-.46-.039l-3.134 3.134a5.93 5.93 0 0 1 .16 1.013c.046.702-.032 1.687-.72 2.375a.5.5 0 0 1-.707 0l-2.829-2.828-3.182 3.182c-.195.195-1.219.902-1.414.707-.195-.195.512-1.22.707-1.414l3.182-3.182-2.829-2.829a.5.5 0 0 1 0-.707c.688-.688 1.673-.767 2.375-.72a5.92 5.92 0 0 1 1.013.16l3.134-3.133a2.77 2.77 0 0 1-.04-.461c0-.43.108-1.022.589-1.503a.5.5 0 0 1 .353-.146z"/></svg>' : '';
+      html += `<span class="news-source">${pin}${t(item.source)}</span>`;
+      html += `<span class="news-date">${item.date}</span>`;
+      html += '</div>';
+
+      if (item.url) {
+        html += `<h3 class="news-title"><a href="${item.url}" target="_blank" rel="noopener">${t(item.title)}</a></h3>`;
+      } else {
+        html += `<h3 class="news-title">${t(item.title)}</h3>`;
+      }
+
+      html += '<div class="news-body">';
+      html += `<div class="news-excerpt">${t(item.excerpt)}</div>`;
+
+      if (item.reposts && item.reposts.length > 0) {
+        html += '<div class="news-syndication">';
+        html += `<span class="syndication-label">${UI[currentLang].repost}</span>`;
+        item.reposts.forEach((r) => {
+          if (r.url) {
+            html += `<a href="${r.url}" target="_blank" rel="noopener" class="syndication-chip">${t(r.name)}</a>`;
+          } else {
+            html += `<span class="syndication-chip">${t(r.name)}</span>`;
+          }
+        });
+        html += '</div>';
+      }
+
+      if (item.related && item.related.length > 0) {
+        html += '<div class="news-related">';
+        html += `<div class="related-label">${UI[currentLang].related}</div>`;
+        item.related.forEach((r, idx) => {
+          const title = t(r.title);
+          const nextIsRepost = idx + 1 < item.related.length && item.related[idx + 1].isRepost;
+          if (r.isRepost) {
+            html += ` <span class="related-repost-label">· ${UI[currentLang].repost}</span> `;
+            if (r.url) {
+              html += `<a href="${r.url}" target="_blank" rel="noopener" class="related-item">${t(r.name)}</a>`;
+            } else {
+              html += `<span class="related-item">${t(r.name)}</span>`;
+            }
+            html += '</div>';
+          } else {
+            html += '<div class="related-row">';
+            if (r.url) {
+              html += `<a href="${r.url}" target="_blank" rel="noopener" class="related-item">`;
+            } else {
+              html += '<span class="related-item">';
+            }
+            html += `<span class="related-source">${t(r.name)}</span>`;
+            if (title) {
+              html += currentLang === 'zh' ? ` 《${title}》` : `: ${title}`;
+            }
+            html += r.url ? '</a>' : '</span>';
+            if (!nextIsRepost) html += '</div>';
+          }
+        });
+        html += '</div>';
+      }
+
+      html += '</div>';
+
+      if (item.talk) {
+        html += '<div class="talk-footer">';
+        html += `<span class="talk-role">${t(item.talk.role)}</span>`;
+        const lq = currentLang === 'zh' ? '《' : '"';
+        const rq = currentLang === 'zh' ? '》' : '"';
+        html += `<span class="talk-title">${lq}${t(item.talk.name)}${rq}</span>`;
+        html += `<span class="talk-venue">${t(item.talk.venue)}</span>`;
+        html += '</div>';
+      }
+      el.innerHTML = html;
+      return el;
+    }
+
+    function createToggle(count, foldedId, labelFn, collapseFn) {
+      const btn = document.createElement('button');
+      btn.className = 'section-toggle';
+      btn.innerHTML = `<span class="toggle-text">${labelFn(count)}</span><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+      btn.addEventListener('click', () => {
+        const region = document.getElementById(foldedId);
+        const isOpen = region.classList.toggle('open');
+        btn.classList.toggle('expanded', isOpen);
+        btn.querySelector('.toggle-text').textContent = isOpen ? collapseFn : labelFn(count);
+      });
+      return btn;
+    }
+
+    function render() {
+      const ui = UI[currentLang];
+
+      document.getElementById('nav-name').textContent = ui.name;
+      document.getElementById('nav-exp').textContent = ui.exp;
+      document.getElementById('nav-edu').textContent = ui.edu;
+      document.getElementById('nav-pub').textContent = ui.pub;
+      document.getElementById('nav-proj').textContent = ui.proj;
+      document.getElementById('nav-code').textContent = ui.code;
+      document.getElementById('nav-news').textContent = ui.news;
+      document.getElementById('nav-lang').textContent = ui.lang;
+      document.getElementById('footer-info').innerHTML = ui.footer1;
+      document.getElementById('footer-updated').textContent = ui.footer2;
+
+      if (currentLang === 'zh') {
+        document.body.classList.add('lang-zh');
+        document.documentElement.setAttribute('lang', 'zh-CN');
+      } else {
+        document.body.classList.remove('lang-zh');
+        document.documentElement.setAttribute('lang', 'en');
+      }
+      document.documentElement.setAttribute('data-lang', currentLang);
+
+      renderHighlights();
+      renderTalks();
+      renderCoverage();
+      renderCampus();
+    }
+
+    function createDualHighlightCard(item) {
+      const el = document.createElement('article');
+      el.className = 'news-card news-highlight';
+      let html = '';
+
+      item.articles.forEach(a => {
+        html += '<div class="highlight-sub">';
+        html += '<div class="highlight-sub-header">';
+        html += `<span class="news-source">${t(a.source)}</span>`;
+        html += `<span class="news-date">${a.date}</span>`;
+        html += '</div>';
+        if (a.url) {
+          html += `<h3 class="news-title"><a href="${a.url}" target="_blank" rel="noopener">${t(a.title)}</a></h3>`;
+        } else {
+          html += `<h3 class="news-title">${t(a.title)}</h3>`;
+        }
+        html += `<div class="news-excerpt">${t(a.excerpt)}</div>`;
+        if (a.reposts && a.reposts.length > 0) {
+          html += '<div class="news-syndication">';
+          html += `<span class="syndication-label">${UI[currentLang].repost}</span>`;
+          a.reposts.forEach((r) => {
+            if (r.url) {
+              html += `<a href="${r.url}" target="_blank" rel="noopener" class="syndication-chip">${t(r.name)}</a>`;
+            } else {
+              html += `<span class="syndication-chip">${t(r.name)}</span>`;
+            }
+          });
+          html += '</div>';
+        }
+        html += '</div>';
+      });
+
+      if (item.related && item.related.length > 0) {
+        html += '<div class="news-related">';
+        html += `<div class="related-label">${UI[currentLang].related}</div>`;
+        item.related.forEach((r, idx) => {
+          const title = t(r.title);
+          const nextIsRepost = idx + 1 < item.related.length && item.related[idx + 1].isRepost;
+          if (r.isRepost) {
+            html += ` <span class="related-repost-label">· ${UI[currentLang].repost}</span> `;
+            if (r.url) {
+              html += `<a href="${r.url}" target="_blank" rel="noopener" class="related-item">${t(r.name)}</a>`;
+            } else {
+              html += `<span class="related-item">${t(r.name)}</span>`;
+            }
+            html += '</div>';
+          } else {
+            html += '<div class="related-row">';
+            if (r.url) {
+              html += `<a href="${r.url}" target="_blank" rel="noopener" class="related-item">`;
+            } else {
+              html += '<span class="related-item">';
+            }
+            html += `<span class="related-source">${t(r.name)}</span>`;
+            if (title) {
+              html += currentLang === 'zh' ? ` 《${title}》` : `: ${title}`;
+            }
+            html += r.url ? '</a>' : '</span>';
+            if (!nextIsRepost) html += '</div>';
+          }
+        });
+        html += '</div>';
+      }
+
+      el.innerHTML = html;
+      return el;
+    }
+
+    function renderHighlights() {
+      const sec = document.getElementById('highlights');
+      sec.innerHTML = `<h2 class="section-title">${UI[currentLang].highlights}</h2>`;
+      NEWS_DATA.highlights.forEach(item => {
+        if (item.dual) {
+          sec.appendChild(createDualHighlightCard(item));
+        } else {
+          sec.appendChild(createCard(item, { highlight: true }));
+        }
+      });
+    }
+
+    function renderTalks() {
+      const sec = document.getElementById('talks');
+      const ui = UI[currentLang];
+      sec.innerHTML = `<h2 class="section-title">${ui.talks}</h2>`;
+
+      const list = document.createElement('div');
+      NEWS_DATA.talks.expanded.forEach(item => {
+        list.appendChild(createCard(item, { pinned: true }));
+      });
+      sec.appendChild(list);
+
+      const folded = document.createElement('div');
+      folded.id = 'talks-folded';
+      folded.className = 'folded-region';
+      NEWS_DATA.talks.folded.forEach(item => {
+        folded.appendChild(createCard(item));
+      });
+      sec.appendChild(folded);
+
+      const count = NEWS_DATA.talks.folded.length;
+      sec.appendChild(createToggle(count, 'talks-folded', ui.showMore, ui.showLess));
+    }
+
+    function renderCoverage() {
+      const sec = document.getElementById('coverage');
+      const ui = UI[currentLang];
+      sec.innerHTML = `<h2 class="section-title">${ui.coverage}</h2>`;
+
+      const pinned = NEWS_DATA.coverage.filter(i => i.pinned);
+      const rest = NEWS_DATA.coverage.filter(i => !i.pinned);
+
+      pinned.forEach(item => {
+        sec.appendChild(createCard(item));
+      });
+
+      if (rest.length > 0) {
+        const folded = document.createElement('div');
+        folded.id = 'coverage-folded';
+        folded.className = 'folded-region';
+        rest.forEach(item => {
+          folded.appendChild(createCard(item));
+        });
+        sec.appendChild(folded);
+        sec.appendChild(createToggle(rest.length, 'coverage-folded', ui.expand, ui.collapse));
+      }
+    }
+
+    function renderCampus() {
+      const sec = document.getElementById('campus');
+      const ui = UI[currentLang];
+      sec.innerHTML = `<h2 class="section-title">${ui.campus}</h2>`;
+
+      const folded = document.createElement('div');
+      folded.id = 'campus-folded';
+      folded.className = 'folded-region';
+      NEWS_DATA.campus.forEach(item => {
+        folded.appendChild(createCard(item));
+      });
+      sec.appendChild(folded);
+      sec.appendChild(createToggle(NEWS_DATA.campus.length, 'campus-folded', ui.expand, ui.collapse));
+    }
+
+    // Init
+    (function init() {
+      const saved = localStorage.getItem('lang');
+      if (saved) {
+        currentLang = saved;
+      } else {
+        const browser = navigator.language || navigator.userLanguage || 'en';
+        currentLang = browser.startsWith('zh') ? 'zh' : 'en';
+      }
+
+      render();
+
+      document.querySelector('.lang-toggle').addEventListener('click', (e) => {
+        e.preventDefault();
+        currentLang = currentLang === 'en' ? 'zh' : 'en';
+        localStorage.setItem('lang', currentLang);
+        render();
+        const navLinks = document.querySelector('.nav-links');
+        if (navLinks) navLinks.classList.remove('open');
+      });
+
+      const hamburger = document.querySelector('.nav-hamburger');
+      const navLinksEl = document.querySelector('.nav-links');
+      hamburger.addEventListener('click', () => navLinksEl.classList.toggle('open'));
+      navLinksEl.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A' && !e.target.classList.contains('lang-toggle')) {
+          navLinksEl.classList.remove('open');
+        }
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('section:not(:first-of-type)').forEach(s => observer.observe(s));
+    })();
+  </script>
+</body>
+</html>

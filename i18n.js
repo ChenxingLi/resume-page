@@ -9,6 +9,7 @@ const translations = {
     'nav.pub': '学术论文',
     'nav.proj': '科研项目',
     'nav.code': '开源',
+    'nav.news': '新闻',
     'nav.lang': 'EN',
 
     // Hero
@@ -63,9 +64,12 @@ const translations = {
     'oss.conflux.desc': 'Conflux 区块链核心节点实现。集成了树图共识、ShRec 交易中继、PoW/PoS 混合共识与双空间执行层。',
     'oss.bench.desc': 'LVMT 论文（OSDI 2023）的实现与模块化基准测试。支持灵活组合 KV 后端、认证存储协议和测试负载。',
 
+    // News credential
+    'news.credential': '相关工作获人民日报、中新社、解放日报等媒体报道 →',
+
     // Footer
     'footer.info': '李辰星 · <a href="mailto:lylcx2007@gmail.com">lylcx2007@gmail.com</a> · 上海',
-    'footer.updated': '最后更新：2026年4月',
+    'footer.updated': '最后更新：2026年5月',
   }
 };
 

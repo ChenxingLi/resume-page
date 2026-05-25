@@ -388,8 +388,16 @@
     .pub-title {
       font-size: 0.88rem;
       font-weight: 600;
-      color: var(--color-text);
       line-height: 1.45;
+    }
+
+    .pub-title a {
+      color: var(--color-text);
+      transition: color 0.15s;
+    }
+
+    .pub-title a:hover {
+      color: var(--color-primary);
     }
 
     .pub-authors {
@@ -570,6 +578,23 @@
       padding-left: 1.55rem;
     }
 
+    /* ── News credential ── */
+    .news-credential {
+      margin-top: 1.5rem;
+    }
+
+    .news-credential a {
+      font-size: 0.84rem;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .news-credential a:hover {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
     /* ── Footer ── */
     footer {
       max-width: var(--max-width);
@@ -692,6 +717,7 @@
       <li><a href="#publications" data-i18n="nav.pub">Publications</a></li>
       <li><a href="#projects" data-i18n="nav.proj">Projects</a></li>
       <li><a href="#opensource" data-i18n="nav.code">Code</a></li>
+      <li><a href="news.html" data-i18n="nav.news">News</a></li>
       <li class="lang-switch"><a href="#" class="lang-toggle" data-i18n="nav.lang">中文</a></li>
     </ul>
   </nav>
@@ -726,6 +752,10 @@
         </div>
       </aside>
     </section>
+
+    <div class="news-credential">
+      <a href="news.html" data-i18n="news.credential">Research covered by People's Daily, China News Service, Liberation Daily, and more →</a>
+    </div>
 
     <!-- Experience -->
     <section id="experience">
@@ -781,8 +811,8 @@
         <li class="pub-item">
           <span class="pub-venue tier-top" data-year="2025">OOPSLA</span>
           <div class="pub-body">
-            <div class="pub-title">HEMVM: A Heterogeneous Blockchain Framework for Interoperable Virtual Machines</div>
-            <div class="pub-authors">V. Nekriach, S.M. Beillahi, <span class="me">Chenxing Li</span>, P. Li, M. Wu, A. Veneris, F. Long</div>
+            <div class="pub-title"><a href="https://dl.acm.org/doi/10.1145/3763076" target="_blank" rel="noopener">HEMVM: A Heterogeneous Blockchain Framework for Interoperable Virtual Machines</a></div>
+            <div class="pub-authors">V. Nekriach, <a href="https://beillahi.github.io/" target="_blank" rel="noopener">S.M. Beillahi</a>, <span class="me">Chenxing Li</span>, P. Li, M. Wu, <a href="https://www.eecg.utoronto.ca/~veneris/" target="_blank" rel="noopener">A. Veneris</a>, <a href="https://www.cs.toronto.edu/~fanl/" target="_blank" rel="noopener">F. Long</a></div>
             <div class="pub-venue-full">Object-oriented Programming, Systems, Languages, and Applications</div>
             <div class="pub-links">
               <a href="https://dl.acm.org/doi/10.1145/3763076" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
@@ -794,8 +824,8 @@
         <li class="pub-item">
           <span class="pub-venue tier-journal" data-year="2024">ACM ToS</span>
           <div class="pub-body">
-            <div class="pub-title">LVMT: An Efficient Authenticated Storage for Blockchain</div>
-            <div class="pub-authors"><span class="me">Chenxing Li</span>, S.M. Beillahi, G. Yang, M. Wu, W. Xu, F. Long</div>
+            <div class="pub-title"><a href="https://dl.acm.org/doi/full/10.1145/3664818" target="_blank" rel="noopener">LVMT: An Efficient Authenticated Storage for Blockchain</a></div>
+            <div class="pub-authors"><span class="me">Chenxing Li</span>, <a href="https://beillahi.github.io/" target="_blank" rel="noopener">S.M. Beillahi</a>, <a href="https://sites.google.com/site/guangyangresearch/home" target="_blank" rel="noopener">G. Yang</a>, M. Wu, <a href="https://people.iiis.tsinghua.edu.cn/~weixu/" target="_blank" rel="noopener">W. Xu</a>, <a href="https://www.cs.toronto.edu/~fanl/" target="_blank" rel="noopener">F. Long</a></div>
             <div class="pub-venue-full">ACM Transactions on Storage</div>
             <div class="pub-links">
               <a href="https://dl.acm.org/doi/full/10.1145/3664818" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
@@ -806,8 +836,8 @@
         <li class="pub-item">
           <span class="pub-venue tier-top" data-year="2023">OSDI</span>
           <div class="pub-body">
-            <div class="pub-title">LVMT: An Efficient Authenticated Storage for Blockchain</div>
-            <div class="pub-authors"><span class="me">Chenxing Li</span>, S.M. Beillahi, G. Yang, M. Wu, W. Xu, F. Long</div>
+            <div class="pub-title"><a href="https://www.usenix.org/conference/osdi23/presentation/li-chenxing" target="_blank" rel="noopener">LVMT: An Efficient Authenticated Storage for Blockchain</a></div>
+            <div class="pub-authors"><span class="me">Chenxing Li</span>, <a href="https://beillahi.github.io/" target="_blank" rel="noopener">S.M. Beillahi</a>, <a href="https://sites.google.com/site/guangyangresearch/home" target="_blank" rel="noopener">G. Yang</a>, M. Wu, <a href="https://people.iiis.tsinghua.edu.cn/~weixu/" target="_blank" rel="noopener">W. Xu</a>, <a href="https://www.cs.toronto.edu/~fanl/" target="_blank" rel="noopener">F. Long</a></div>
             <div class="pub-venue-full">USENIX Symposium on Operating Systems Design and Implementation</div>
             <div class="pub-links">
               <a href="https://www.usenix.org/conference/osdi23/presentation/li-chenxing" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
@@ -819,8 +849,8 @@
         <li class="pub-item">
           <span class="pub-venue tier-journal" data-year="2022">Clim. Policy</span>
           <div class="pub-body">
-            <div class="pub-title">An Authenticated and Secure Accounting System for International Emissions Trading</div>
-            <div class="pub-authors"><span class="me">Chenxing Li</span>, Y. Yu, A.C.-C. Yao, D. Zhang, X. Zhang</div>
+            <div class="pub-title"><a href="https://www.tandfonline.com/doi/abs/10.1080/14693062.2022.2107474" target="_blank" rel="noopener">An Authenticated and Secure Accounting System for International Emissions Trading</a></div>
+            <div class="pub-authors"><span class="me">Chenxing Li</span>, Y. Yu, <a href="https://iiis.tsinghua.edu.cn/yao/" target="_blank" rel="noopener">A.C.-C. Yao</a>, <a href="https://www.3e.tsinghua.edu.cn/en/article/169" target="_blank" rel="noopener">D. Zhang</a>, <a href="https://www.jcglt.tsinghua.edu.cn/en/personnel/14.html" target="_blank" rel="noopener">X. Zhang</a></div>
             <div class="pub-venue-full">Climate Policy 22, no. 9-10</div>
             <div class="pub-links">
               <a href="https://www.tandfonline.com/doi/abs/10.1080/14693062.2022.2107474" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
@@ -832,8 +862,8 @@
         <li class="pub-item">
           <span class="pub-venue tier-top" data-year="2020">SoCC</span>
           <div class="pub-body">
-            <div class="pub-title">ShRec: Bandwidth-Efficient Transaction Relay in High-Throughput Blockchain Systems</div>
-            <div class="pub-authors">Y. Han, <span class="me">Chenxing Li</span>, P. Li, M. Wu, D. Zhou, F. Long</div>
+            <div class="pub-title"><a href="https://dl.acm.org/doi/10.1145/3419111.3421283" target="_blank" rel="noopener">ShRec: Bandwidth-Efficient Transaction Relay in High-Throughput Blockchain Systems</a></div>
+            <div class="pub-authors">Y. Han, <span class="me">Chenxing Li</span>, P. Li, M. Wu, D. Zhou, <a href="https://www.cs.toronto.edu/~fanl/" target="_blank" rel="noopener">F. Long</a></div>
             <div class="pub-venue-full">ACM Symposium on Cloud Computing</div>
             <div class="pub-links">
               <a href="https://dl.acm.org/doi/10.1145/3419111.3421283" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
@@ -845,8 +875,8 @@
         <li class="pub-item">
           <span class="pub-venue tier-top" data-year="2020">ATC</span>
           <div class="pub-body">
-            <div class="pub-title">A Decentralized Blockchain with High Throughput and Fast Confirmation</div>
-            <div class="pub-authors"><span class="me">Chenxing Li</span>, P. Li, D. Zhou, Z. Yang, M. Wu, G. Yang, W. Xu, A. Yao</div>
+            <div class="pub-title"><a href="https://www.usenix.org/conference/atc20/presentation/li-chenxing" target="_blank" rel="noopener">A Decentralized Blockchain with High Throughput and Fast Confirmation</a></div>
+            <div class="pub-authors"><span class="me">Chenxing Li</span>, P. Li, D. Zhou, Z. Yang, M. Wu, <a href="https://sites.google.com/site/guangyangresearch/home" target="_blank" rel="noopener">G. Yang</a>, <a href="https://people.iiis.tsinghua.edu.cn/~weixu/" target="_blank" rel="noopener">W. Xu</a>, <a href="https://iiis.tsinghua.edu.cn/yao/" target="_blank" rel="noopener">A. Yao</a></div>
             <div class="pub-venue-full">USENIX Annual Technical Conference</div>
             <div class="pub-links">
               <a href="https://www.usenix.org/conference/atc20/presentation/li-chenxing" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
@@ -858,8 +888,8 @@
         <li class="pub-item">
           <span class="pub-venue tier-journal" data-year="2020">Bioinform.</span>
           <div class="pub-body">
-            <div class="pub-title">Secure Multiparty Computation for Privacy-Preserving Drug Discovery</div>
-            <div class="pub-authors">R. Ma, Y. Li, <span class="me">Chenxing Li</span>, F. Wan, H. Hu, W. Xu, J. Zeng</div>
+            <div class="pub-title"><a href="https://academic.oup.com/bioinformatics/article/36/9/2872/5709032" target="_blank" rel="noopener">Secure Multiparty Computation for Privacy-Preserving Drug Discovery</a></div>
+            <div class="pub-authors">R. Ma, Y. Li, <span class="me">Chenxing Li</span>, F. Wan, H. Hu, <a href="https://people.iiis.tsinghua.edu.cn/~weixu/" target="_blank" rel="noopener">W. Xu</a>, <a href="https://en.westlake.edu.cn/faculty/jianyang-zeng.html" target="_blank" rel="noopener">J. Zeng</a></div>
             <div class="pub-venue-full">Bioinformatics</div>
             <div class="pub-links">
               <a href="https://academic.oup.com/bioinformatics/article/36/9/2872/5709032" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
@@ -870,8 +900,8 @@
         <li class="pub-item pub-folded">
           <span class="pub-venue tier-other" data-year="2018">ICSC</span>
           <div class="pub-body">
-            <div class="pub-title">Context-Based Few-Shot Word Representation Learning</div>
-            <div class="pub-authors"><span class="me">Chenxing Li</span>, G. Wang, G. de Melo</div>
+            <div class="pub-title"><a href="https://ieeexplore.ieee.org/document/8334464" target="_blank" rel="noopener">Context-Based Few-Shot Word Representation Learning</a></div>
+            <div class="pub-authors"><span class="me">Chenxing Li</span>, <a href="https://wang-gerui.github.io/" target="_blank" rel="noopener">G. Wang</a>, <a href="http://gerard.demelo.org/" target="_blank" rel="noopener">G. de Melo</a></div>
             <div class="pub-venue-full">IEEE International Conference on Semantic Computing</div>
             <div class="pub-links">
               <a href="https://ieeexplore.ieee.org/document/8334464" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
@@ -882,8 +912,8 @@
         <li class="pub-item pub-folded">
           <span class="pub-venue tier-other" data-year="2017">IMACC</span>
           <div class="pub-body">
-            <div class="pub-title">Revealing Encryption for Partial Ordering</div>
-            <div class="pub-authors">H. Haagh, Y. Ji, <span class="me">Chenxing Li</span>, C. Orlandi, Y. Song</div>
+            <div class="pub-title"><a href="https://link.springer.com/chapter/10.1007/978-3-319-71045-7_1" target="_blank" rel="noopener">Revealing Encryption for Partial Ordering</a></div>
+            <div class="pub-authors">H. Haagh, Y. Ji, <span class="me">Chenxing Li</span>, <a href="https://users-cs.au.dk/orlandi/" target="_blank" rel="noopener">C. Orlandi</a>, <a href="https://crypto-song.github.io/" target="_blank" rel="noopener">Y. Song</a></div>
             <div class="pub-venue-full">IMA International Conference on Cryptography and Coding</div>
             <div class="pub-links">
               <a href="https://link.springer.com/chapter/10.1007/978-3-319-71045-7_1" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
@@ -895,8 +925,8 @@
         <li class="pub-item pub-folded">
           <span class="pub-venue tier-other" data-year="2016">LCN</span>
           <div class="pub-body">
-            <div class="pub-title">BAH: A New Bitmap Index for Data Retrieval in Traffic Archival</div>
-            <div class="pub-authors"><span class="me">Chenxing Li</span>, Z. Chen, W. Zheng, Y. Wu, J. Cao</div>
+            <div class="pub-title"><a href="https://ieeexplore.ieee.org/document/7796869" target="_blank" rel="noopener">BAH: A New Bitmap Index for Data Retrieval in Traffic Archival</a></div>
+            <div class="pub-authors"><span class="me">Chenxing Li</span>, <a href="https://www.icenter.tsinghua.edu.cn/icenteren/info/1103/1036.htm" target="_blank" rel="noopener">Z. Chen</a>, W. Zheng, <a href="https://wuyinjun-1993.github.io/" target="_blank" rel="noopener">Y. Wu</a>, <a href="http://jcao.org/" target="_blank" rel="noopener">J. Cao</a></div>
             <div class="pub-venue-full">IEEE Conference on Local Computer Networks</div>
             <div class="pub-links">
               <a href="https://ieeexplore.ieee.org/document/7796869" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
@@ -907,8 +937,8 @@
         <li class="pub-item pub-folded">
           <span class="pub-venue tier-journal" data-year="2016">IEEE CL</span>
           <div class="pub-body">
-            <div class="pub-title">CAMP: A New Bitmap Index for Data Retrieval in Traffic Archival</div>
-            <div class="pub-authors">Y. Wu, Z. Chen, J. Cao, H. Li, <span class="me">Chenxing Li</span>, Y. Wang, W. Zheng, J. Chang, J. Zhou, Z. Hu, J. Guo</div>
+            <div class="pub-title"><a href="https://ieeexplore.ieee.org/document/7448840" target="_blank" rel="noopener">CAMP: A New Bitmap Index for Data Retrieval in Traffic Archival</a></div>
+            <div class="pub-authors"><a href="https://wuyinjun-1993.github.io/" target="_blank" rel="noopener">Y. Wu</a>, <a href="https://www.icenter.tsinghua.edu.cn/icenteren/info/1103/1036.htm" target="_blank" rel="noopener">Z. Chen</a>, <a href="http://jcao.org/" target="_blank" rel="noopener">J. Cao</a>, H. Li, <span class="me">Chenxing Li</span>, Y. Wang, W. Zheng, J. Chang, J. Zhou, Z. Hu, J. Guo</div>
             <div class="pub-venue-full">IEEE Communication Letters</div>
             <div class="pub-links">
               <a href="https://ieeexplore.ieee.org/document/7448840" class="pub-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Paper</a>
@@ -977,12 +1007,14 @@
         </div>
       </div>
     </section>
+
+
   </main>
 
   <!-- Footer -->
   <footer>
     <div data-i18n="footer.info">Chenxing Li &middot; <a href="mailto:lylcx2007@gmail.com">lylcx2007@gmail.com</a> &middot; Shanghai, China</div>
-    <div style="margin-top: 0.25rem; opacity: 0.65;" data-i18n="footer.updated">Last updated April 2026</div>
+    <div style="margin-top: 0.25rem; opacity: 0.65;" data-i18n="footer.updated">Last updated May 2026</div>
   </footer>
 
   <script>
